@@ -1,0 +1,358 @@
+"""
+This program is just the same as the last one, except it includes the
+option to play with a bot which will tell you what to input for one
+side or the other. It definitely did take a lot of lines of code.
+"""
+
+import random
+
+box1 = " "; box2 = " "; box3 = " "; box4 = " "; box5 = " "; box6 = " "; box7 = " "; box8 = " "; box9 = " "; turn = "x" # Sets variables to a default
+
+bot = input("Would you like a bot to play against? Enter 'Yes' if so. " ) # Asks for bot
+if bot == "Yes":
+    side = input("What side would you like the bot to play for, x or o? ") # Asks for what side bot plays
+    
+def suggest_move(b1, b2, b3, b4, b5, b6, b7, b8, b9):
+    rand1 = random.randint(1,3) # Assigns a random number for starting move
+    rand2 = random.randint(0,4) # Assigns the first random generation number
+    rand3 = random.randint(0,3) # Assigns the second random generation number
+    rand4 = random.randint(0,2) # Assigns the third random generation number
+    rand5 = random.randint(0,1) # Assigns the fourth random generation number
+    rand6 = 0 # Assigns the fifth random generation number
+    bot_move = ""
+    move = 0
+    if box1 == "x" or box1 == "o": # Finds number of moves taken
+        move = move + 1
+    if box2 == "x" or box2 == "o": # Finds number of moves taken
+        move = move + 1
+    if box3 == "x" or box3 == "o": # Finds number of moves taken
+        move = move + 1
+    if box4 == "x" or box4 == "o": # Finds number of moves taken
+        move = move + 1
+    if box5 == "x" or box5 == "o": # Finds number of moves taken
+        move = move + 1
+    if box6 == "x" or box6 == "o": # Finds number of moves taken
+        move = move + 1
+    if box7 == "x" or box7 == "o": # Finds number of moves taken
+        move = move + 1
+    if box8 == "x" or box8 == "o": # Finds number of moves taken
+        move = move + 1
+    if box9 == "x" or box9 == "o": # Finds number of moves taken
+        move = move + 1
+    if move == 0: # Finds if no moves have been played on the board yet
+        if rand1 != 2:
+            bot_move = str(rand1) + "," + str(rand1) # Chooses an optimal starting move
+        else:
+            bot_move = str(rand1-1) + "," + str(rand1-1) # Chooses an optimal starting move if rand1 is 2
+    elif move == 1: # Finds if bot has the second move
+        if box5 == "x": # Responds with a corner move against a center move
+            if rand1 == 2:
+                bot_move = str(rand1+1) + "," + str(rand1+1)
+            else:
+                bot_move = str(rand1) + "," + str(rand1)
+        else: # No matter what x plays, the best move to respond is the center (corner or edge)
+            bot_move = "2,2"
+    elif move == 2: # Finds if bot has the third move
+        if box5 == "o": # Finds if the two best moves have been played
+            if box1 == "x":
+                bot_move = "3,3"
+            elif box9 == "x":
+                bot_move = "1,1"
+        elif box1 == "o": # Finds if the opponent played the opposite corner (box1)
+            bot_move = "1,3"
+        elif box9 == "o": # Finds if the opponent played the opposite corner (box9)
+            bot_move = "3,1"
+        elif box3 or box7 == "o": # Finds if the opponent played a different corner
+            if box1 == "x":
+                bot_move = "1,2"
+            elif box9 == "x":
+                bot_move = "2,3"
+        else: # The only remaining scenario is that the opponent played an edge against the corner, which loses
+            bot_move = "2,2"
+    elif move == 3: # Finds if bot had the fourth move
+        if box1 == "o": # Checks if x played the center on the first turn
+            if box2 == "x": # Blocks a winning threat
+                bot_move = "3,2"
+            if box3 == "x": # Blocks a winning threat
+                bot_move = "3,1"
+            if box4 == "x": # Blocks a winning threat
+                bot_move = "2,3"
+            if box6 == "x": # Blocks a winning threat
+                bot_move = "2,1"
+            if box7 == "x": # Blocks a winning threat
+                bot_move = "1,3"
+            if box8 == "x": # Blocks a winning threat
+                bot_move = "1,2"
+            if box9 == "x": # Threatens a future fork
+                bot_move = "3,1"
+        elif box5 == "o": # Checks if x did not play the center on their first turn
+            if box1 and box9 == "x": # Picks a random edge if x took opposite corners
+                if rand1 == 1:
+                    bot_move = "1,2"
+                elif rand1 == 2:
+                    bot_move = "2,1"
+                elif rand1 == 3:
+                    bot_move = "3,2"
+            elif box3 and box7 == "x": # Picks a random edge if x took opposite corners
+                if rand1 == 1:
+                    bot_move = "1,2"
+                elif rand1 == 2:
+                    bot_move = "2,1"
+                elif rand1 == 3:
+                    bot_move = "3,2"
+            elif box2 == "x": # Takes the correct corner if x took the top edge
+                if box1 == "x":
+                    bot_move = "1,3" # Blocks a possible 3-in-a-row
+                elif box3 == "x":
+                    bot_move = "1,1" # Blocks a possible 3-in-a-row
+                else:
+                    bot_move = "1,1" # Threatens a fork next turn
+            elif box4 == "x": # Takes the correct corner if x took the left edge
+                if box1 == "x":
+                    bot_move = "3,1" # Blocks a possible 3-in-a-row
+                elif box7 == "x":
+                    bot_move = "1,1" # Blocks a possible 3-in-a-row
+                else:
+                    bot_move = "1,1" # Threatens a fork next turn
+            elif box6 == "x": # Takes the correct corner if x took the right edge
+                if box3 == "x":
+                    bot_move = "3,3" # Blocks a possible 3-in-a-row
+                elif box9 == "x":
+                    bot_move = "1,3" # Blocks a possible 3-in-a-row
+                else:
+                    bot_move = "1,1" # Threatens a fork next turn
+            elif box8 == "x": # Takes the correct corner if x took the bottom edge
+                if box7 == "x":
+                    bot_move = "3,3" # Blocks a possible 3-in-a-row
+                elif box9 == "x":
+                    bot_move = "3,1" # Blocks a possible 3-in-a-row
+                else:
+                    bot_move = "3,3" # Threatens a fork next turn
+            else: # It is possible the opponent took two corners not across from one another
+                if box1 and box3 == "x":
+                    bot_move = "1,2"
+                elif box1 and box7 == "x":
+                    bot_move = "2,1"
+                elif box3 and box9 == "x":
+                    bot_move = "2,3"
+                elif box7 and box9 == "x":
+                    bot_move = "3,2"
+        elif box9 == "o": # Checks if x played the center on the first turn
+            if box1 == "x": # Threatens a future fork
+                bot_move = "1,3"
+            elif box2 == "x": # Blocks a winning threat
+                bot_move = "3,2"
+            elif box3 == "x": # Blocks a winning threat
+                bot_move = "3,1"
+            elif box4 == "x": # Blocks a winning threat
+                bot_move = "2,3"
+            elif box6 == "x": # Blocks a winning threat
+                bot_move = "2,1"
+            elif box7 == "x": # Blocks a winning threat
+                bot_move = "1,3"
+            elif box8 == "x": # Blocks a winning threat
+                bot_move = "1,2"
+    else: # An algorithm to run the remaining part of the game
+        squares = "123456789" # Compiles a list of all of the remaining squares
+        if box1 == "x" or box1 == "o": # Checks if square 1 is full
+            full1 = squares.find("1")
+            squares = squares[0:full1] + squares[full1 + 1:]
+        if box2 == "x" or box2 == "o": # Checks if square 2 is full
+            full2 = squares.find("2")
+            squares = squares[0:full2] + squares[full2 + 1:]
+        if box3 == "x" or box3 == "o": # Checks if square 3 is full
+            full3 = squares.find("3")
+            squares = squares[0:full3] + squares[full3 + 1:]
+        if box4 == "x" or box4 == "o": # Checks if square 4 is full
+            full4 = squares.find("4")
+            squares = squares[0:full4] + squares[full4 + 1:]
+        if box5 == "x" or box5 == "o": # Checks if square 5 is full
+            full5 = squares.find("5")
+            squares = squares[0:full5] + squares[full5 + 1:]
+        if box6 == "x" or box6 == "o": # Checks if square 6 is full
+            full6 = squares.find("6")
+            squares = squares[0:full6] + squares[full6 + 1:]
+        if box7 == "x" or box7 == "o": # Checks if square 7 is full
+            full7 = squares.find("7")
+            squares = squares[0:full7] + squares[full7 + 1:]
+        if box8 == "x" or box8 == "o": # Checks if square 8 is full
+            full8 = squares.find("8")
+            squares = squares[0:full8] + squares[full8 + 1:]
+        if box9 == "x" or box9 == "o": # Checks if square 9 is full
+            full9 = squares.find("9")
+            squares = squares[0:full9] + squares[full9 + 1:]
+        rand_move = 0
+        if len(squares) == 5: # Chooses a random fifth move
+            rand_move = squares[rand2]
+        elif len(squares) == 4: # Chooses a random sixth move
+            rand_move = squares[rand3]
+        elif len(squares) == 3: # Chooses a random seventh move
+            rand_move = squares[rand4]
+        elif len(squares) == 2: # Chooses a random eighth move
+            rand_move = squares[rand5]
+        elif len(squares) == 1: # Chooses a "random" ninth move
+            rand_move = squares[rand6]
+        if rand_move == "1": # Says what to do if square 1 is chosen
+            bot_move = "1,1"
+        elif rand_move == "2": # Says what to do if square 2 is chosen
+            bot_move = "1,2"
+        elif rand_move == "3": # Says what to do if square 3 is chosen
+            bot_move = "1,3"
+        elif rand_move == "4": # Says what to do if square 4 is chosen
+            bot_move = "2,1"
+        elif rand_move == "5": # Says what to do if square 5 is chosen
+            bot_move = "2,2"
+        elif rand_move == "6": # Says what to do if square 6 is chosen
+            bot_move = "2,3"
+        elif rand_move == "7": # Says what to do if square 7 is chosen
+            bot_move = "3,1"
+        elif rand_move == "8": # Says what to do if square 8 is chosen
+            bot_move = "3,2"
+        elif rand_move == "9": # Says what to do if square 9 is chosen
+            bot_move = "3,3"
+    return bot_move # Returns the suggested move
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+print(box1 + "-" + box2 + "-" + box3); print("______"); print(box4 + "-" + box5 + "-" + box6); print("______"); print(box7 + "-" + box8 + "-" + box9) # Prints the initial board
+while True:
+    if bot == "Yes" and side == turn: # Sees if it is the bot's turn
+        suggestion = suggest_move(box1,box2,box3,box4,box5,box6,box7,box8,box9) # Runs the function to find an optimal move
+        print("The bot played " + suggestion)
+        moverow = int(suggestion[0]) # Plays the bot's row
+        movecolumn = int(suggestion[2]) # Plays the bot's column
+        
+    else:
+        try:
+            moverow = int(input("What row will your move be in? ")) # Asks for row
+        except ValueError: # Solves no input problem
+            print("Please enter a row.")
+            continue
+        try:
+            movecolumn = int(input("What column will your first move be in? ")) # Asks for a column
+        except ValueError: # Solves no input problem
+            print("Please enter a column.")
+            continue
+        
+    if moverow == 1 and movecolumn == 1: # Checks if user entered top left box
+        if box1 == " ":
+            box1 = turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 1 and movecolumn == 2: # Checks if user entered top mid box
+        if box2 == " ":
+            box2 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 1 and movecolumn == 3: # Checks if user entered top right box
+        if box3 == " ":
+            box3 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 2 and movecolumn == 1: # Checks if user entered mid left box
+        if box4 == " ":
+            box4 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 2 and movecolumn == 2: # Checks if user entered center box
+        if box5 == " ":
+            box5 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 2 and movecolumn == 3: # Checks if user entered mid right box
+        if box6 == " ":
+            box6 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 3 and movecolumn == 1: # Checks if user entered bottom left box
+        if box7 == " ":
+            box7 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 3 and movecolumn == 2: # Checks if user entered bottom mid box
+        if box8 == " ":
+            box8 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    elif moverow == 3 and movecolumn == 3: # Checks if user entered bottom box
+        if box9 == " ":
+            box9 = turn # Adds the turn
+        else:
+            print("That is an invalid move.")
+            continue
+    else:
+        print("That is an invalid move.") # Checks if user entered an invalid box
+        continue
+    
+    if turn == "x": # Switches turn x to o
+        turn = "o"
+    elif turn == "o": # Switches turn x to o
+        turn = "x"
+        
+    print(box1 + "-" + box2 + "-" + box3); print("______"); print(box4 + "-" + box5 + "-" + box6); print("______"); print(box7 + "-" + box8 + "-" + box9) # Prints grid each turn
+    
+    if box1 == "x" and box4 == "x" and box7 == "x": # Win condition 1
+        win = 1
+        break
+    elif box2 == "x" and box5 == "x" and box8 == "x": # Win condition 2
+        win = 1
+        break
+    elif box3 == "x" and box6 == "x" and box9 == "x": # Win condition 3
+        win = 1
+        break
+    elif box1 == "x" and box2 == "x" and box3 == "x": # Win condition 4
+        win = 1
+        break
+    elif box4 == "x" and box5 == "x" and box6 == "x": # Win condition 5
+        win = 1
+        break
+    elif box7 == "x" and box8 == "x" and box9 == "x": # Win condition 6
+        win = 1
+        break
+    elif box1 == "x" and box5 == "x" and box9 == "x": # Win condition 7
+        win = 1
+        break
+    elif box3 == "x" and box5 == "x" and box7 == "x": # Win condition 8
+        win = 1
+        break
+    elif box1 == "o" and box4 == "o" and box7 == "o": # Win condition 9
+        win = 0
+        break
+    elif box2 == "o" and box5 == "o" and box8 == "o": # Win condition 10
+        win = 0
+        break
+    elif box3 == "o" and box6 == "o" and box9 == "o": # Win condition 11
+        win = 0
+        break
+    elif box1 == "o" and box2 == "o" and box3 == "o": # Win condition 12
+        win = 0
+        break
+    elif box4 == "o" and box5 == "o" and box6 == "o": # Win condition 13
+        win = 0
+        break
+    elif box7 == "o" and box8 == "o" and box9 == "o": # Win condition 14
+        win = 0
+        break
+    elif box1 == "o" and box5 == "o" and box9 == "o": # Win condition 15
+        win = 0
+        break
+    elif box3 == "o" and box5 == "o" and box7 == "o": # Win condition 16
+        win = 0
+        break
+    elif not(box1 == " " or box2 == " " or box3 == " " or box4 == " " or box5 == " " or box6 == " " or box7 == " " or box8 == " " or box9 == " "): # Draw condition
+        win = 0.5
+        break
+    
+if win == 1: # Checks if player x won
+    print("Player x won the game!")
+elif win == 0.5: # Checks if it was a draw
+    print("The two players tied!")
+elif win == 0:  # Checks if player o won
+    print("Player o won the game!")
