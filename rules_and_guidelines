@@ -1,0 +1,37 @@
+The JBman Tic-tac-toe Battle:
+Hosted by www.youtube.com/@jbman
+
+Story:
+I have been taking a Computer Programming course in school recently and gotten pretty good at it, and so I was inspired
+to make some sort of bot when I watched Sebastian Lague's video about creating a chess bot. I set out to make a tic-tac-toe
+bot in Python, which worked really well and was basically unbeatable once I finished it. But there were still some problems
+with it, such as the fact that it is like 500 lines of code, so I decided to host a competition like Sebastian Lague to see
+who can use the most creative solutions to make a chess bot that is actually balanced.
+
+How to enter:
+1. Code your Tic-tac-toe bot in one of the following programming languages: Java, JavaScript, Python, C++, C, C#, or Scratch
+2. Create a Github page with your code included (optional: Create a separate page talking about how you made it and what new strategies you used)
+3. Post the link to that Github page in a YouTube comment on the following video:
+4. If you want to be notified when I post results or the final video, subscribe to my YT channel
+5. I will host the tournament, and you'll see if you won in my next programming video in a couple weeks!
+
+Rules for your bot:
+1. It must be in one of the programming langugages previously mentioned
+2. It must include some way to output its move based on an input of a different move
+3. It must obviously follow the rules of tic-tac-toe
+4. IMPORTANT! All of the code to run the program must be included in the one file. No importing custom APIs or anything.
+
+The competition:
+The competition actually has less to do with results against the other bots (those will almost always end in ties) and more to
+do with other things. Each bot will receive a score from 0 to 2000. The first 250 points will be based on the
+size of the bot. I will put each bot into wordcounter.net, removing all of the comments, and the bots will be ranked in order
+of length, with the smallest getting 25, second smallest getting 245, next 240, and so on. The next 250 are based on the
+readability of the bot. I will not disclose the method I will use to calculate this, because I don't want you guys to beat
+the system, but I'll give you a hint. Make sure to always add comments to explain confusing functions or operations. Again,
+they will be ranked and given points in the opposite order. The next 250 are based on the programming language you use. If
+you know enough to use C, you will get the maximum of 250 points. C++ is worth 245, C# is worth 240, Java is 235, JavaScript
+will give 225 points, Scratch will give 215, and Python will give 200 (ChatGPT made these rankings). The rest are based on
+performance. In the tournament, each bot will play 4 other bots in 10 game matches: 2 other bots in the competition, and
+2 "decoys". These include bots I have created that make mistakes, real people, and other things. If you can't consistently
+beat these decoys,you will not perform as well. 250 points will come from the bot's Elo ranking within the group at the end
+of the competition, and 1000 points will come from the win-loss record. Whatever bot has the most points wins.
