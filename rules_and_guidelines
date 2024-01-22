@@ -6,7 +6,7 @@ I have been taking a Computer Programming course in school recently and gotten p
 to make some sort of bot when I watched Sebastian Lague's video about creating a chess bot. I set out to make a tic-tac-toe
 bot in Python, which worked really well and was basically unbeatable once I finished it. But there were still some problems
 with it, such as the fact that it is like 500 lines of code, so I decided to host a competition like Sebastian Lague to see
-who can use the most creative solutions to make a chess bot that is actually balanced.
+who can use the most creative solutions to make a tic-tac-toe bot that is actually balanced.
 
 How to enter:
 1. Code your Tic-tac-toe bot in one of the following programming languages: Java, JavaScript, Python, C++, C, C#, or Scratch
@@ -33,5 +33,5 @@ you know enough to use C, you will get the maximum of 250 points. C++ is worth 2
 will give 225 points, Scratch will give 215, and Python will give 200 (ChatGPT made these rankings). The rest are based on
 performance. In the tournament, each bot will play 4 other bots in 10 game matches: 2 other bots in the competition, and
 2 "decoys". These include bots I have created that make mistakes, real people, and other things. If you can't consistently
-beat these decoys,you will not perform as well. 250 points will come from the bot's Elo ranking within the group at the end
+beat these decoys, you will not perform as well. 250 points will come from the bot's Elo ranking within the group at the end
 of the competition, and 1000 points will come from the win-loss record. Whatever bot has the most points wins.
